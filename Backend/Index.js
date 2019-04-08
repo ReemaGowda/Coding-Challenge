@@ -107,7 +107,7 @@ console.log("\nGetting balance from my testnet address:");
 //Get balance of my bitcoin address.
 bcapi.getAddrBal("myGRP8kqufa4LN21Nuj2tqJpeDqnGgYM4X", "",
     function (err, data) {
-        //use callback so things happen in order.
+       
         printResponse(err, data);
 
         console.log("\nStarting new transaction...");
