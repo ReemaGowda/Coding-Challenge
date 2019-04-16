@@ -19,7 +19,7 @@ network = {
 };
 
 //key== private key will loaded up in the key variable 
-//the use this for sign the transition 
+//the use this for sign the transitions
 
 const key = bitcoin.ECPair.fromWIF('cRqBQhx7ZLQZKrLohRukyTQZCgBqN187nn7VKHHC1cE4M95BqwAH', network);
 
