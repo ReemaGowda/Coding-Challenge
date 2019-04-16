@@ -1,9 +1,11 @@
 // console.log("hello")
+
+//1.install the  npm install bitcoinjs lib
 const bitcoin = require('bitcoinjs-lib');
 const assert = require('assert')
 var bcypher = require('blockcypher');
 
-
+console.log(bitcoin.networks)
 network = {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
@@ -15,14 +17,33 @@ network = {
     scriptHash: 5,
     wif: 0xef
 };
+
+//key== private key will loaded up in the key variable 
+//the use this for sign the transition 
+
 const key = bitcoin.ECPair.fromWIF('cRqBQhx7ZLQZKrLohRukyTQZCgBqN187nn7VKHHC1cE4M95BqwAH', network);
+
+//generate the testnet address
+//here we are telling the bitcoin we are working on the testnet address i.e networks.testnet
 let testnet = bitcoin.networks.testnet;
 
+
+
+//keypair going generate address and the private key
+//Ec 
+//A private key is a random number. It is a 256 bit number.
 const keypair = bitcoin.ECPair.makeRandom({
+    //here we are specfing the network we are working on that is testnet
     network: testnet
 })
 
+//wif holds the private key
+
 let privatekey = keypair.toWIF();
+
+//This holds our testnet address
+//P2PKH: "Pay To Public Key Hash"
+//This is how transactions are made.
 const {
     address
 } = bitcoin.payments.p2pkh({
@@ -45,6 +66,7 @@ var networkkeys = {
 };
 
 //This is my token from blockcyper
+//var bcapi = new bcypher('btc','main','YOURTOKEN');
 var bcapi = new bcypher('btc', 'test3', '95f0907a140c4666b89b1d4ed970dbb0');
 
 var newtx = null;
@@ -74,6 +96,7 @@ function sign(err, data) {
         tx.pubkeys = [];
         tx.signatures = data.tosign.map(function (tosign) {
             tx.pubkeys.push(networkkeys.public);
+            //output of tx is not readble so we are coverting into the hex
             var signature = key.sign(Buffer.from(tosign, "hex"));
             return signature.toString("hex");
         });
@@ -94,9 +117,11 @@ function sign(err, data) {
 
 
 var newtx = {
+    //input (who is paying)
     "inputs": [{
         "addresses": ["mzU8SLxfewYogn8mEP69b5ScaZgo7JrGbt"]
     }],
+    //Add the output (who to pay to) of the form address
     "outputs": [{
         "addresses": ["2MyXoDJ8fsU33NYagNqEaC5qCaEu8URQNkw"],
         "value": 1000
@@ -105,6 +130,7 @@ var newtx = {
 
 console.log("\nGetting balance from my testnet address:");
 //Get balance of my bitcoin address.
+//add the address balance to my to my tocken
 bcapi.getAddrBal("myGRP8kqufa4LN21Nuj2tqJpeDqnGgYM4X", "",
     function (err, data) {
        
