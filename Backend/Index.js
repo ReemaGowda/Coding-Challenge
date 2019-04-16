@@ -23,7 +23,7 @@ network = {
 
 const key = bitcoin.ECPair.fromWIF('cRqBQhx7ZLQZKrLohRukyTQZCgBqN187nn7VKHHC1cE4M95BqwAH', network);
 
-//generate the testnet address
+//generate the testnet addresss
 //here we are telling the bitcoin we are working on the testnet address i.e networks.testnet
 let testnet = bitcoin.networks.testnet;
 
