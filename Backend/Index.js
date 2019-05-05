@@ -20,6 +20,7 @@ network = {
 
 //key== private key will loaded up in the key variable 
 //the use this for sign the transitions
+//Wallet Import Format
 
 const key = bitcoin.ECPair.fromWIF('cRqBQhx7ZLQZKrLohRukyTQZCgBqN187nn7VKHHC1cE4M95BqwAH', network);
 
@@ -61,7 +62,8 @@ assert.strictEqual(address.startsWith('m') || address.startsWith('n'), true)
 
 var networkkeys = {
     private: "cV32hsGikuiJyhFvTeX9JnjXPhQHrtFWKCfmN22n4Hc9q8tqgWHb",
-    address: "mzU8SLxfewYogn8mEP69b5ScaZgo7JrGbt",
+    public  : "031b822b96c603dddd5ccf2655ac6bf04b7225dc3f02a15324063449a23510540c",
+    adddress: "mmSBomF54QBkuHEgNSvAnqh6GtgbDqCAaN",
     wif: "cRqBQhx7ZLQZKrLohRukyTQZCgBqN187nn7VKHHC1cE4M95BqwAH"
 };
 
@@ -117,21 +119,25 @@ function sign(err, data) {
 
 
 var newtx = {
-    //input (who is paying)
+   // input (who is paying) //random generated 
     "inputs": [{
-        "addresses": ["mzU8SLxfewYogn8mEP69b5ScaZgo7JrGbt"]
+        "addresses": ["mmSBomF54QBkuHEgNSvAnqh6GtgbDqCAaN"]
     }],
-    //Add the output (who to pay to) of the form address
+    //Add the output (who to pay to) of the  address // 
     "outputs": [{
-        "addresses": ["2MyXoDJ8fsU33NYagNqEaC5qCaEu8URQNkw"],
+        "addresses": ["2NGZrVvZG92qGYqzTLjCAewvPZ7JE8S8VxE"],
         "value": 1000
     }]
+
+   
 };
 
 console.log("\nGetting balance from my testnet address:");
-//Get balance of my bitcoin address.
+
 //add the address balance to my to my tocken
-bcapi.getAddrBal("myGRP8kqufa4LN21Nuj2tqJpeDqnGgYM4X", "",
+//Get balance of my bitcoin address.
+bcapi.getAddrBal("mmSBomF54QBkuHEgNSvAnqh6GtgbDqCAaN", "",
+//use callback so things happen in order.
     function (err, data) {
        
         printResponse(err, data);
